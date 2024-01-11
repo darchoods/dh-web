@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+    font-family: "Muli","Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
+body {
+    color: #2D2D2D;
+    background-color: #E2E3E7;
+    background-image: url('../images/texture.jpg');
+    background-repeat: repeat;
+}
+
+header {
+    border-top: 5px solid white;
+    border-bottom: 5px solid white;
+    background-color: #1e1e1e;
+    margin: 15px 0;
+    box-shadow: 0px 0px 1px 0px #000000;
+    color: white;
+    padding: 5px;
+}
+
+#header + nav ul li a,
+#header + nav ul li a.active {
+    background-color: #1E1E1E;
+    color: #CCCCCC;
+    margin-bottom: -5px;
+    box-shadow: 0 0 2px #000000;
+    border-bottom: 5px solid #006499;
+    transition: border-bottom 0.8s;
+    padding: 10px 20px;
+}
+
+#header + nav ul li.active a {
+    color: #CCCCCC;
+    border-bottom: 5px solid #00A6FF;
+}
+
+#header + nav ul li a:hover,
+#header + nav ul li a:focus {
+    color: #CCCCCC;
+    background-color: #1E1E1E;
+    border-bottom: 5px solid #00A6FF;
+    transition: border-bottom 0.4s;
+}
+
