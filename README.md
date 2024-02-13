@@ -1,12 +1,12 @@
 # Darchoods Web V2
 
 ## Modifying this project
-- <code>git clone git@git.drk.sc:darchoods/api.git web</code>
+- <code>git clone https://github.com/darchoods/dh-web web</code>
 - <code>cd web</code>
 - <code>yarn install</code>
 - <code>yarn run dev</code>
 
-- open <code>http://localhost:8001/</code> in your browser
+- open <code>http://localhost:8081/</code> in your browser
 
 
 ## Linter
