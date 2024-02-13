@@ -1,6 +1,5 @@
 import Vue from 'vue';
 import { h } from 'vue-demi';
-import CHKSVue from 'chks-vue';
 import Highcharts from 'highcharts';
 import HighchartsVue from 'highcharts-vue';
 import HighchartsMore from 'highcharts/highcharts-more';
@@ -9,13 +8,11 @@ import vmodal from 'vue-js-modal';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
-// import ToggleField from '@vueform/toggle/dist/toggle.vue2.js';
 
 import App from '@/App.vue';
 import router from '@/router';
 import store from '@/stores';
 import '@/assets/styles/app.css';
-import '@/assets/styles/toggle.css';
 
 import {
   faTimes, faPlus, faPencilAlt, faSortDown, faSortUp, faSort, faTrash, faUser, faUserCircle, faHome, faCheckCircle, faTimesCircle, faFileDownload, faCheck,
@@ -42,13 +39,13 @@ Object.entries(components).forEach(([path, definition]) => {
   Vue.component(componentName, definition.default);
 });
 
-Vue.use(CHKSVue);
 HighchartsMore(Highcharts);
 Vue.use(HighchartsVue, { Highcharts });
 Vue.use(vmodal);
 
 Vue.component('Fa', FontAwesomeIcon);
-// Vue.component('ToggleField', ToggleField);
+Vue.component('FA', FontAwesomeIcon);
+Vue.component('fa', FontAwesomeIcon);
 
 axios.defaults.baseURL = import.meta.env.VITE_API_URL;
 

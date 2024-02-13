@@ -1,4 +1,4 @@
-import PostRequest from '@/helpers/Core/PostRequest';
+import PostRequest from '@/helpers/Api/PostRequest';
 
 export default {
   login: (data, successCB, failureCB) => {

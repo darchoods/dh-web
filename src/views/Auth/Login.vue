@@ -3,7 +3,6 @@
     <div class="flex flex-col w-full min-w-sm md:w-3/6 justify-center py-12 px-4 sm:px-6 lg:flex-none">
       <div class="flex flex-col">
         <div class="flex flex-col items-center">
-          <img src="@/assets/images/chks_logo.png" class="w-64">
           <div class="flex w-full">
             <Alert v-if="accountActivated" type="success" class="w-full">
               Your account has been activated. Please login.
@@ -34,16 +33,6 @@
               You do not have appropriate permissions to access that resource.
             </Alert>
           </div>
-
-          <h2 v-if="!coreNotFound" class="mt-8 font-light text-xl text-zinc-600 dark:text-zinc-400 text-center">
-            Please enter your details to log into {{ environment }}
-          </h2>
-          <h2 v-else class="mt-8 font-light text-xl text-zinc-600 dark:text-zinc-400 text-center">
-            Portal is currently in-accessible due to a Network Error.
-            <div v-if="env !== 'Live'">
-              You are on a {{ env }} environment,<br>check you are connected to the VPN!
-            </div>
-          </h2>
         </div>
 
         <div v-if="coreNotFound === false" class="mt-12">
@@ -56,13 +45,13 @@
             </Alert>
             <div>
               <EmailField
-                v-model="form.email"
-                name="email"
-                autocomplete="email"
+                v-model="form.username"
+                name="username"
+                autocomplete="username"
                 required
-                label="Email Address"
+                label="Username"
                 float-label
-                :hint="validationErrors.email"
+                :hint="validationErrors.username"
               />
             </div>
 
@@ -115,42 +104,20 @@ export default {
     return {
       env: null,
       form: {
-        email: '',
+        username: '',
         password: '',
       },
-      coreNotFound: this.$route.query.coreNotFound ? true : false,
-      accountActivated: this.$route.query['account-activated'] ? true : false,
-      invalidAccountCode: this.$route.query['invalid-account-code'] ? true : false,
-      emailActivated: this.$route.query['email-activated'] ? true : false,
-      invalidEmailCode: this.$route.query['invalid-email-code'] ? true : false,
-      accountDeleted: this.$route.query['account-deleted'] ? true : false,
-      passwordReset: this.$route.query['password-reset'] ? true : false,
-      noAuthentication: this.$route.query['no-auth'] ? true : false,
-      sessionExpired: this.$route.query['session-expired'] ? true : false,
-      noAuthorization: this.$route.query['no-authorization'] ? true : false,
 
       validationErrors: {},
     };
   },
 
-  beforeMount() {
-    this.$store.dispatch('login_notifications/loadActive');
-
-    if (import.meta.env.DEV) {
-      this.env = 'Dev';
-    } else if (import.meta.env.QA) {
-      this.env = 'QA';
-    } else {
-      this.env = 'Live';
-    }
-  },
-
   methods: {
     login() {
       this.validationErrors = {};
-      if (this.form.email.length === 0) {
-        console.log('[LOGIN] email is empty');
-        this.validationErrors.email = 'The email field is required.';
+      if (this.form.username.length === 0) {
+        console.log('[LOGIN] username is empty');
+        this.validationErrors.username = 'The username field is required.';
       }
       if (this.form.password.length === 0) {
         console.log('[LOGIN] password is empty');
@@ -164,13 +131,7 @@ export default {
 
       this.$store.dispatch('user/login', this.form)
         .then(() => {
-          this.$refs.guestLayout.$refs.guestLayout.querySelector('#content').classList.add('opacity-0');
-          setTimeout(() => {
-            this.$refs.guestLayout.$refs.guestLayout.classList.add('w-32').remove('w-full');
-          }, 100);
-          setTimeout(() => {
-            this.$router.push({ name: 'index' });
-          }, 1200);
+          this.$router.push({ name: 'index' });
         })
         .catch((err) => {
           console.log(err);
@@ -183,18 +144,6 @@ export default {
       authStatus: 'status',
       error: 'error',
     }),
-    ...mapFields('login_notifications', {
-      activeNotifications: 'active',
-    }),
-    environment() {
-      return 'CHKS ' + this.env;
-    },
-  },
-
-  watch: {
-    '$route.query.coreNotFound'(value) {
-      this.coreNotFound = value;
-    },
   },
 };
 </script>

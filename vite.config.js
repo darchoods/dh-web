@@ -20,7 +20,7 @@ const config = defineConfig({
 
   server: {
     host: '0.0.0.0',
-    port: 9027,
+    port: 8081,
   },
 });
 
