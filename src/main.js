@@ -1,13 +1,12 @@
-import Vue from 'vue';
-import { h } from 'vue-demi';
+import { createApp } from 'vue';
 import Highcharts from 'highcharts';
 import HighchartsVue from 'highcharts-vue';
 import HighchartsMore from 'highcharts/highcharts-more';
 import axios from 'axios';
-import vmodal from 'vue-js-modal';
+import emitter from 'tiny-emitter/instance';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+import { FontAwesomeIcon, FontAwesomeLayers } from '@fortawesome/vue-fontawesome';
 
 import App from '@/App.vue';
 import router from '@/router';
@@ -29,23 +28,23 @@ library.add([
   faFileDownload,
 ]);
 
-Vue.config.productionTip = false;
-Vue.config.devtools = true;
+const app = createApp(App);
+const isDev = import.meta.env.DEV;
 
-// Register all the local Vue components
-const components = import.meta.globEager('./components/**/*.vue');
+// Register all the Vue components
+const components = import.meta.glob('./components/**/*.vue', { eager: true });
 Object.entries(components).forEach(([path, definition]) => {
   const componentName = path.split('/').pop().replace(/\.\w+$/, '');
-  Vue.component(componentName, definition.default);
+  app.component(componentName, definition.default);
 });
 
-HighchartsMore(Highcharts);
-Vue.use(HighchartsVue, { Highcharts });
-Vue.use(vmodal);
 
-Vue.component('Fa', FontAwesomeIcon);
-Vue.component('FA', FontAwesomeIcon);
-Vue.component('fa', FontAwesomeIcon);
+HighchartsMore(Highcharts);
+app.use(HighchartsVue, { Highcharts });
+app.component('Fa', FontAwesomeIcon);
+app.component('FA', FontAwesomeIcon);
+app.component('fa', FontAwesomeIcon);
+app.component('FaLayers', FontAwesomeLayers);
 
 axios.defaults.baseURL = import.meta.env.VITE_API_URL;
 
@@ -54,11 +53,13 @@ if (token) {
   axios.defaults.headers.Authorization = 'Bearer ' + token;
 }
 
-Vue.prototype.$eventBus = new Vue();
+app.config.globalProperties.$eventBus = {
+  $on: (...args) => emitter.on(...args),
+  $once: (...args) => emitter.once(...args),
+  $off: (...args) => emitter.off(...args),
+  $emit: (...args) => emitter.emit(...args)
+};
 
-const app = new Vue({
-  router,
-  store,
-  render: () => h(App),
-});
-app.$mount('#app');
+app.use(router)
+  .use(store)
+  .mount('#app');

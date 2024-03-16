@@ -5,9 +5,6 @@
 </template>
 
 <script>
-import { mapFields } from 'vuex-map-fields';
-import DebugFlag from '@/helpers/DebugFlag';
-
 export default {
   name: 'App',
 };
