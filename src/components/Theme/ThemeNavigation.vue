@@ -60,10 +60,10 @@ export default {
         route: '/login',
         link: 'Sign In',
       });
-      this.nav_right.push({
-        route: '/register',
-        link: 'Register',
-      });
+      // this.nav_right.push({
+      //   route: '/register',
+      //   link: 'Register',
+      // });
     }
   },
 };

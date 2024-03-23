@@ -1,9 +1,11 @@
 <template>
   <div class="flex flex-col bg-white mb-6 rounded shadow">
     <header id="header" class="flex -mx-[10px] shadow-lg">
-      <div class="text-xl py-2 px-4">
-        {{ header }}
-      </div>
+      <slot name="header">
+        <div class="text-xl py-2 px-4">
+          {{ header }}
+        </div>
+      </slot>
     </header>
     <div class="flex p-2">
       <slot />

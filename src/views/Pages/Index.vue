@@ -16,25 +16,23 @@
     </template>
 
     <template #side>
-      <ContentBlock header="IRC Information">
-        <p>To connect to Darchoods IRC network, you can use the following details.</p>
-      </ContentBlock>
-      <ContentBlock header="Users in #Darchoods">
-        <ul>
-          <li>~xLink</li>
-          <li>@narada</li>
-          <li>...</li>
-        </ul>
-      </ContentBlock>
+      <RightNav />
     </template>
 
-    <ContentBlock header="IRC Documentation">
-      <p>Using the API you can access various statistics about the IRC Network. This api will return JSON regardless of headers set, this may change in the future if there is enough request for it.</p>
+    <ContentBlock v-for="post in news">
+      <template #header>
+        <div class="flex flex-col py-2	">
+          <div class="flex text-sm px-4 font-thin"><span class="text-blue-400 mr-1">{{ post.title }}</span> by {{ post.author }}</div>
+          <div class="flex text-sm px-4 font-thin">Published on {{ post.created_at.fuzzy }}</div>
+        </div>
+      </template>
+      <p>{{ post.content }}</p>
     </ContentBlock>
   </two-columns>
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import { can } from '@/helpers/Permissions';
 
 export default {
@@ -47,8 +45,19 @@ export default {
       invalidEmailCode: this.$route.query['invalid-email-code'] ? true : false,
     };
   },
+
+  created() {
+    this.$store.dispatch('news/loadAll');
+  },
+
   methods: {
     can,
   },
+
+  computed: {
+    ...mapGetters({
+      news: 'news/posts',
+    }),
+  }
 };
 </script>

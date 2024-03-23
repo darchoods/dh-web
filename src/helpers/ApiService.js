@@ -1,5 +1,5 @@
-import { default as AuthService } from '@/helpers/Core/Auth';
+import { default as NewsService } from '@/helpers/Api/News';
 
 export default {
-  ...AuthService,
+  ...NewsService,
 };
