@@ -18,7 +18,7 @@ const hasPermission = (userPermissions, permissionName) => {
   permissionName = permissionName.toLowerCase();
 
   // make sure its an actual permission
-  // this replicated the Gate part of the Core side
+  // this replicated the Gate part of the API side
   let allPermissions = store.getters['permissions/allNodes'];
   if (!Array.isArray(allPermissions)) {
     return false;

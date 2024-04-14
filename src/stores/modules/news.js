@@ -16,7 +16,7 @@ const actions = {
     return new Promise((resolve, reject) => {
       ApiService.getNews(
         (response) => {
-          commit('UPDATE_POSTS', response.data.data.posts);
+          commit('UPDATE_POSTS', response.data.response.posts);
           resolve(response);
         },
         (error) => {

@@ -1,32 +1,33 @@
 <template>
   <div class="flex flex-col">
     <ContentBlock header="IRC Information">
-        <div class="flex flex-col">
-          <div class="flex">To connect to Darchoods IRC network, you can use the following details.</div>
-          <div class="flex">
-            <table class="table-auto w-full border border-solid border-zinc-500">
-              <tr>
-                <td class="border p-2">Server:</td>
-                <td class="border p-2">irc.darchoods.net</td>
-              </tr>
-              <tr>
-                <td class="border p-2">Port:</td>
-                <td class="border p-2">6667</td>
-              </tr>
-              <tr>
-                <td class="border p-2">Channel:</td>
-                <td class="border p-2">#Darchoods</td>
-              </tr>
-            </table>
+      <div class="flex flex-col">
+        <div class="flex">To connect to Darchoods IRC network, you can use the following details.</div>
+        <div class="flex flex-col w-full">
+          <div class="flex flex-col lg:flex-row w-full">
+            <div class="flex w-full lg:w-2/4 p-2 border font-semibold">Server:</div>
+            <div class="flex w-full lg:w-3/4 p-2 border">irc.darchoods.net</div>
+          </div>
+          
+          <div class="flex flex-col lg:flex-row w-full">
+            <div class="flex w-full lg:w-2/4 p-2 border font-semibold">Port:</div>
+            <div class="flex w-full lg:w-3/4 p-2 border">6667</div>
+          </div>
+
+          <div class="flex flex-col lg:flex-row w-full">
+            <div class="flex w-full lg:w-2/4 p-2 border font-semibold">Channel:</div>
+            <div class="flex w-full lg:w-3/4 p-2 border">#darchoods</div>
           </div>
         </div>
-      </ContentBlock>
-      <ContentBlock header="Users in #Darchoods">
-        <ul>
-          <li>~xLink</li>
-          <li>@narada</li>
-          <li>...</li>
-        </ul>
-      </ContentBlock>
+      </div>
+    </ContentBlock>
+
+    <ContentBlock header="Users in #Darchoods">
+      <ul>
+        <li>~xLink</li>
+        <li>~narada</li>
+        <li>...</li>
+      </ul>
+    </ContentBlock>
   </div>
 </template>

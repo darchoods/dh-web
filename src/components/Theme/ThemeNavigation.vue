@@ -1,5 +1,5 @@
 <template>
-  <nav class="flex flex-row w-10/12 justify-between bg-[#1E1E1E] mt-[-20px] border-t-none border-b-[5px] border-b-[#006499]">
+  <nav>
     <ul class="flex flex-row">
       <li 
         v-for="row in nav_left" 
@@ -9,25 +9,34 @@
           'active': row.group === this.$route.meta.group
         }"
       >
-        <a :href="row.route">{{ row.link }}</a>
+        <router-link :to="{ name: row.route }">{{ row.link }}</router-link>
       </li>
     </ul>
-    <ul class="flex flex-row">
+    <ul v-if="isAuthenticated && Object.keys(user).length" class="flex flex-row">
       <li 
-        v-for="row in nav_right" 
-        :key="row.route" 
         class="flex"
         :class="{
-          'active': row.group === this.$route.meta.group
+          'active': 'settings' === this.$route.meta.group
         }"
       >
-        <a :href="row.route">{{ row.link }}</a>
+        <router-link :to="{ name: 'index' }">Settings</router-link>
+      </li>
+      <li 
+        class="flex"
+        :class="{
+          'active': 'settings' === this.$route.meta.group
+        }"
+      >
+        <router-link :to="{ name: 'logout' }">Signout ({{ user.screenname }})</router-link>
+        <img :src="avatar" :alt="user.screenname + '\'s Avatar'">
       </li>
     </ul>
   </nav>
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
   name: 'ThemeNavigation',
 
@@ -35,54 +44,47 @@ export default {
     return {
       nav_left: [
         {
-          route: '/',
+          route: 'index',
           link: 'Home',
         },
         {
-          route: '/heartbeat',
+          route: 'index',
           link: 'Heartbeat',
           group: 'heartbeat',
         },
         {
-          route: '/channels',
+          route: 'index',
           link: 'Channels',
           group: 'channels',
         },
         {
-          route: '/qdb',
+          route: 'qdb',
           link: 'QuoteDB',
           group: 'qdb',
         },
         {
-          route: '/apis',
+          route: 'index',
           link: 'APIs',
           group: 'apis',
         },
       ],
-      nav_right: [],
     };
   },
 
   created() {
-    if (this.$store.getters['user/isAuthenticated']) {
-      this.nav_right.push({
-        route: '/settings',
-        link: 'Settings',
-      });
-      this.nav_right.push({
-        route: '/logout',
-        link: 'Signout',
-      });
-    } else {
-      this.nav_right.push({
-        route: '/login',
-        link: 'Sign In',
-      });
-      // this.nav_right.push({
-      //   route: '/register',
-      //   link: 'Register',
-      // });
-    }
+
+  },
+
+  computed: {
+    ...mapGetters('user', ['isAuthenticated']),
+    ...mapGetters('user', { user: 'getProfile' }),
+
+    avatar() {
+      let avatarUrl = new URL(this.user.avatar);
+      avatarUrl.searchParams.set('s', '44');
+
+      return avatarUrl;
+    },
   },
 };
 </script>

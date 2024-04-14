@@ -13,10 +13,23 @@ export default [
     beforeEnter: middlewares.noAuth,
   },
   {
+    path: '/logout',
+    name: 'logout',
+    component: () => import('@/views/Auth/Logout.vue'),
+    beforeEnter: middlewares.needsAuth,
+  },
+  {
     path: '/qdb',
     name: 'qdb',
     component: () => import('@/views/QuoteDb/Index.vue'),
-    beforeEnter: middlewares.noAuth,
+    meta: {
+      group: 'qdb',
+    }
+  },
+  {
+    path: '/qdb/:channel',
+    name: 'qdb.channel',
+    component: () => import('@/views/QuoteDb/Channel.vue'),
     meta: {
       group: 'qdb',
     }

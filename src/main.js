@@ -46,7 +46,7 @@ app.component('FA', FontAwesomeIcon);
 app.component('fa', FontAwesomeIcon);
 app.component('FaLayers', FontAwesomeLayers);
 
-axios.defaults.baseURL = import.meta.env.VITE_API_URL;
+axios.defaults.baseURL = import.meta.env.VITE_API_URL +'api/';
 
 const token = localStorage.getItem('user-token');
 if (token) {

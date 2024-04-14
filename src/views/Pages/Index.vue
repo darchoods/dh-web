@@ -19,21 +19,32 @@
       <RightNav />
     </template>
 
-    <ContentBlock v-for="post in news">
-      <template #header>
-        <div class="flex flex-col py-2	">
-          <div class="flex text-sm px-4 font-thin"><span class="text-blue-400 mr-1">{{ post.title }}</span> by {{ post.author }}</div>
-          <div class="flex text-sm px-4 font-thin">Published on {{ post.created_at.fuzzy }}</div>
-        </div>
-      </template>
-      <p>{{ post.content }}</p>
-    </ContentBlock>
+    <div v-if="Object.keys(news).length">
+      <ContentBlock v-for="post in news">
+        <template #header>
+          <div class="flex flex-col py-2">
+            <div class="flex flex-col sm:flex-row w-full mb-2 sm:mb-0 text-sm px-4 font-thin h-12 sm:h-auto truncate">
+              <span class="text-blue-400 text-xl sm:mr-1 truncate w-64 sm:w-auto">{{ post.title }}</span>
+              <span class="sm:mt-2"> by {{ post.author }}</span>
+            </div>
+            <div class="flex text-sm px-4 font-thin">Published on {{ post.created_at.fuzzy }}</div>
+          </div>
+        </template>
+        <p v-html="parseMarkdown(post.content)" />
+      </ContentBlock>
+    </div>
+    <div v-else>
+      <ContentBlock :loading="true" /> 
+      <ContentBlock :loading="true" /> 
+      <ContentBlock :loading="true" /> 
+    </div>
   </two-columns>
 </template>
 
 <script>
 import { mapGetters } from 'vuex';
 import { can } from '@/helpers/Permissions';
+import markdown from '@/helpers/Markdown';
 
 export default {
   name: 'PagesIndex',
@@ -52,6 +63,9 @@ export default {
 
   methods: {
     can,
+    parseMarkdown(content) {
+      return markdown(content);
+    },
   },
 
   computed: {

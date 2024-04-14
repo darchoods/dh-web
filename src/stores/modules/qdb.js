@@ -21,7 +21,7 @@ const actions = {
           number: 8,
         },
         (response) => {
-          commit('UPDATE_RANDOM', response.data.data.quotes);
+          commit('UPDATE_RANDOM', response.data.response.quotes);
           resolve(response);
         },
         (error) => {
@@ -35,7 +35,7 @@ const actions = {
     return new Promise((resolve, reject) => {
       ApiService.qdbChanlist(
         (response) => {
-          commit('UPDATE_CHANNELS', response.data.data.channels);
+          commit('UPDATE_CHANNELS', response.data.response.channels);
           resolve(response);
         },
         (error) => {
