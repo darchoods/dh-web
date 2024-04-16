@@ -31,6 +31,16 @@
         <img :src="avatar" :alt="user.screenname + '\'s Avatar'">
       </li>
     </ul>
+    <ul v-else class="flex flex-row">
+      <li 
+        class="flex"
+        :class="{
+          'active': 'login' === this.$route.meta.group
+        }"
+      >
+        <router-link :to="{ name: 'login' }">Login</router-link>
+      </li>
+    </ul>
   </nav>
 </template>
 

@@ -98,10 +98,15 @@ export default {
 
       this.$store.dispatch('user/login', this.form)
         .then(() => {
+          this.$store.dispatch('user/loadProfile');
           this.$router.push({ name: 'index' });
         })
         .catch((err) => {
-          console.log(err);
+          switch (true) {
+            case err.includes('Credentials are invalid'):
+              this.authStatus = 'error';
+            break;
+          }
         });
     },
   },
