@@ -19,20 +19,22 @@
       <RightNav />
     </template>
 
-    <div v-if="Object.keys(news).length">
-      <ContentBlock v-for="post in news">
-        <template #header>
-          <div class="flex flex-col py-2">
-            <div class="flex flex-col sm:flex-row w-full mb-2 sm:mb-0 text-sm px-4 font-thin h-12 sm:h-auto truncate">
-              <span class="text-blue-400 text-xl sm:mr-1 truncate w-64 sm:w-auto">{{ post.title }}</span>
-              <span class="sm:mt-2"> by {{ post.author }}</span>
-            </div>
-            <div class="flex text-sm px-4 font-thin">Published on {{ post.created_at.fuzzy }}</div>
+    <template #header>
+      <Header3 text="Site News" />
+    </template>
+
+    <ContentBlock v-if="Object.keys(news).length" v-for="post in news">
+      <template #header>
+        <div class="flex flex-col py-2">
+          <div class="flex flex-col sm:flex-row w-full mb-2 sm:mb-0 text-sm px-4 font-thin h-12 sm:h-auto truncate">
+            <span class="text-blue-400 text-xl sm:mr-1 truncate w-64 sm:w-auto">{{ post.title }}</span>
+            <span class="sm:mt-2"> by {{ post.author }}</span>
           </div>
-        </template>
-        <p v-html="parseMarkdown(post.content)" />
-      </ContentBlock>
-    </div>
+          <div class="flex text-sm px-4 font-thin">Published on {{ post.created_at.fuzzy }}</div>
+        </div>
+      </template>
+      <p v-html="parseMarkdown(post.content)" />
+    </ContentBlock>
     <div v-else>
       <ContentBlock :loading="true" /> 
       <ContentBlock :loading="true" /> 

@@ -6,6 +6,7 @@
 
 * {
     font-family: "Muli","Helvetica Neue",Helvetica,Arial,sans-serif;
+    scrollbar-width: thin;
 }
 
 body {
@@ -35,10 +36,12 @@ header {
     transition: border-bottom 0.8s;
     padding: 10px 20px;
 }
-
-#header + nav ul li.active a {
-    color: #CCCCCC;
-    border-bottom: 5px solid #00A6FF;
+#header + nav ul li.disabled a,
+#header + nav ul li.disabled a:hover,
+#header + nav ul li.disabled a:focus {
+    color: #626262;
+    border-bottom: 5px solid #004e78;
+    cursor: not-allowed;
 }
 
 #header + nav ul li a:hover,
@@ -49,8 +52,23 @@ header {
     transition: border-bottom 0.4s;
 }
 
+#header + nav ul li.active a,
+#header + nav ul li.active a:hover,
+#header + nav ul li.active a:focus {
+    color: #CCCCCC;
+    border-bottom: 5px solid #00A6FF;
+}
 
 @layer base {
+
+  code {
+    padding: 2px 4px;
+    font-size: 90%;
+    color: #c7254e;
+    background-color: #f9f2f4;
+    white-space: nowrap;
+    border-radius: 4px;
+  }
 
   .skeleton-box, .skeleton-box-light {
     display: inline-block;

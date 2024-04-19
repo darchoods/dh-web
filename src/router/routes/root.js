@@ -20,7 +20,7 @@ export default [
   },
   {
     path: '/qdb',
-    name: 'qdb',
+    name: 'qdb.index',
     component: () => import('@/views/QuoteDb/Index.vue'),
     meta: {
       group: 'qdb',

@@ -14,13 +14,14 @@ import store from '@/stores';
 import '@/assets/styles/app.css';
 
 import {
-  faTimes, faPlus, faPencilAlt, faSortDown, faSortUp, faSort, faTrash, faUser, faUserCircle, faHome, faCheckCircle, faTimesCircle, faFileDownload, faCheck,
+  faTimes, faPlus, faPencilAlt, faSortDown, faSortUp, faSort, faRotate, faTrash, faUser, faUserCircle, faHome, faCheckCircle, faTimesCircle, faFileDownload, faCheck,
 } from '@fortawesome/free-solid-svg-icons';
 
 library.add([
   faTimes, faPlus, faPencilAlt,
   faCheck,
   faSort, faSortUp, faSortDown,
+  faRotate,
   faTrash,
   faUser, faUserCircle,
   faHome,

@@ -6,7 +6,8 @@
         :key="row.route" 
         class="flex"
         :class="{
-          'active': row.group === this.$route.meta.group
+          'active': row.group === this.$route.meta.group,
+          'disabled': row.disabled
         }"
       >
         <router-link :to="{ name: row.route }">{{ row.link }}</router-link>
@@ -56,19 +57,22 @@ export default {
         {
           route: 'index',
           link: 'Home',
+          class: '',
         },
         {
           route: 'index',
           link: 'Heartbeat',
           group: 'heartbeat',
+          disabled: true,
         },
         {
           route: 'index',
           link: 'Channels',
           group: 'channels',
+          disabled: true,
         },
         {
-          route: 'qdb',
+          route: 'qdb.index',
           link: 'QuoteDB',
           group: 'qdb',
         },
@@ -76,6 +80,7 @@ export default {
           route: 'index',
           link: 'APIs',
           group: 'apis',
+          disabled: true,
         },
       ],
     };
