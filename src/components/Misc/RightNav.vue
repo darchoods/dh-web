@@ -11,7 +11,7 @@
           
           <div class="flex flex-col lg:flex-row w-full">
             <div class="flex w-full lg:w-2/4 p-2 border font-semibold">Port:</div>
-            <div class="flex w-full lg:w-3/4 p-2 border">6667</div>
+            <div class="flex w-full lg:w-3/4 p-2 border">6697</div>
           </div>
 
           <div class="flex flex-col lg:flex-row w-full">
