@@ -10,7 +10,12 @@
           'disabled': row.disabled
         }"
       >
-        <router-link :to="{ name: row.route }">{{ row.link }}</router-link>
+        <template v-if="row.disabled">
+          <a href="#">{{ row.link }}</a>
+        </template>
+        <template v-else>
+          <router-link :to="{ name: row.route }">{{ row.link }}</router-link>
+        </template> 
       </li>
     </ul>
     <ul v-if="isAuthenticated && Object.keys(user).length" class="flex flex-row">
