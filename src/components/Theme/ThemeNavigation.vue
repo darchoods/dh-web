@@ -34,6 +34,7 @@
     </ul>
     <ul v-else class="flex flex-row">
       <li 
+        v-if="false"
         class="flex"
         :class="{
           'active': 'login' === this.$route.meta.group
@@ -66,7 +67,7 @@ export default {
           disabled: true,
         },
         {
-          route: 'index',
+          route: 'channels.index',
           link: 'Channels',
           group: 'channels',
           disabled: true,

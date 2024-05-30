@@ -4,15 +4,15 @@
   >
     <input
       ref="inputValue"
+      v-model="model"
       type="checkbox"
       :name="fieldName"
-      :checked="checkedState"
+      :checked="model"
       :disabled="disabled"
       :class="{
         'opacity-50 cursor-not-allowed': disabled,
-        'checked': checkedState,
+        'checked': model,
       }"
-      @change="updateValue"
     >
     <label
       v-if="label"
@@ -33,8 +33,8 @@ export default {
       type: String,
       required: true,
     },
-    checked: {
-      type: [Number, Boolean],
+    modelValue: {
+      type: [Array, Boolean],
       default: () => false,
     },
     label: {
@@ -53,27 +53,9 @@ export default {
     },
   },
 
-  data() {
-    return {
-      focused: false,
-      checkedState: false,
-    };
-  },
-
-  mounted() {
-    this.checkedState = this.checked;
-  },
-
   methods: {
-    updateValue() {
-      const value = this.$refs.inputValue.checked;
-      this.checkedState = value;
-      this.$emit('input', this.checkedState);
-    },
     toggleCheckbox() {
-      const value = this.$refs.inputValue.checked;
-      this.checkedState = !value;
-      this.$emit('input', this.checkedState);
+      this.model = !this.model;
     },
   },
 
@@ -81,6 +63,14 @@ export default {
     fieldName() {
       return this.name || null;
     },
+    model:{
+      get() {
+        return this.modelValue;
+      },
+      set(value) {
+        this.$emit('update:modelValue', value);
+      }
+    }
   },
 };
 </script>

@@ -48,6 +48,16 @@
               />
             </div>
 
+            <div class="space-y-1">
+              <CheckboxField
+                v-model="form.remember"
+                name="remember"
+                required
+                label="Remember Me"
+                float-label
+              />
+            </div>
+
             <div>
               <Btn type="submit">
                 Sign In
@@ -72,6 +82,7 @@ export default {
       form: {
         username: '',
         password: '',
+        remember: false
       },
       authStatus: null,
 

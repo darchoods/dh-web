@@ -22,7 +22,7 @@
       </div>
     </ContentBlock>
 
-    <ContentBlock header="Users in #Darchoods">
+    <ContentBlock v-if="false" header="Users in #Darchoods">
       <ul>
         <li>~xLink</li>
         <li>~narada</li>
